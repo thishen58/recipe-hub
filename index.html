@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Recipe Sharing</title>
+</head>
+<body>
+  <h1>Recipe Sharing</h1>
+
+  <form id="recipeForm">
+    Recipe Title: <input type="text" id="title" required><br><br>
+    Ingredients:<br>
+    <textarea id="ingredients" rows="4" cols="30" required></textarea><br><br>
+    Instructions:<br>
+    <textarea id="instructions" rows="4" cols="30" required></textarea><br><br>
+    <button type="submit">Add Recipe</button>
+  </form>
+
+  <h2>Recipes:</h2>
+  <div id="recipes"></div>
+
+  <script>
+    const form = document.getElementById('recipeForm');
+    const recipesDiv = document.getElementById('recipes');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const title = document.getElementById('title').value;
+      const ingredients = document.getElementById('ingredients').value;
+      const instructions = document.getElementById('instructions').value;
+
+      const recipe = document.createElement('div');
+      recipe.innerHTML = `<h3>${title}</h3>
+                          <p><b>Ingredients:</b><br>${ingredients.replace(/\n/g, '<br>')}</p>
+                          <p><b>Instructions:</b><br>${instructions.replace(/\n/g, '<br>')}</p>
+                          <hr>`;
+
+      recipesDiv.prepend(recipe);
+
+      form.reset();
+    });
+  </script>
+</body>
+</html>
